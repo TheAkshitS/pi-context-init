@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+*.tgz
+coverage/
+.env
+.DS_Store
+
+.vitest/
+
+.scratch/
+.pi/pi-agent-proxy
