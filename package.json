@@ -1,6 +1,6 @@
 {
   "name": "pi-context-init",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Safe /init for Pi: inspect the repo, draft concise evidence-backed instructions, and write only on explicit approval.",
   "keywords": [
     "pi-package"
