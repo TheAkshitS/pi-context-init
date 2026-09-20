@@ -19,6 +19,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 12.4.2
+      - run: echo "$PNPM_HOME/bin" >> "$GITHUB_PATH"
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
