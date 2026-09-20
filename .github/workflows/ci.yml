@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: check conventional commits
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            sh tools/check-commits.sh origin/main..HEAD
+          else
+            sh tools/check-commits.sh "$BASE..HEAD"
+          fi
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.4.2
+      - run: echo "$PNPM_HOME/bin" >> "$GITHUB_PATH"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm add -g @earendil-works/pi-coding-agent@0.85.1
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm coverage
+      - run: sh tools/smoke-install.sh

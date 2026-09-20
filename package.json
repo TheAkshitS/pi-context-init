@@ -1,0 +1,64 @@
+{
+  "name": "pi-context-init",
+  "version": "1.0.0",
+  "description": "Safe /init for Pi: inspect the repo, draft concise evidence-backed instructions, and write only on explicit approval.",
+  "keywords": [
+    "pi-package"
+  ],
+  "homepage": "https://github.com/TheAkshitS/pi-context-init#readme",
+  "bugs": {
+    "url": "https://github.com/TheAkshitS/pi-context-init/issues"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@12.4.2",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "author": "Akshit Sharma",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheAkshitS/pi-context-init.git"
+  },
+  "type": "module",
+  "main": "dist/src/extension.js",
+  "files": [
+    "dist/src/",
+    "skills/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "pi": {
+    "extensions": [
+      "./dist/src/extension.js"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "scripts": {
+    "prepack": "tsc",
+    "prepare": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint src test",
+    "format:check": "oxfmt --check src",
+    "format": "oxfmt src",
+    "test": "tsc && vitest run",
+    "coverage": "tsc && vitest run --coverage",
+    "clean": "rm -rf dist",
+    "check:commits": "sh tools/check-commits.sh"
+  },
+  "devDependencies": {
+    "@oxlint/plugins": "^1.83.0",
+    "@types/node": "^24.13.6",
+    "@vitest/coverage-v8": "^5.0.1",
+    "oxfmt": "^0.68.0",
+    "oxlint": "^1.83.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}
